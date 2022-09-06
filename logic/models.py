@@ -70,5 +70,5 @@ class Quiz(models.Model):
 
 class LeaderBoard(Player):
     class Meta(Player.Meta):
-        verbose_name = 'User'
+        verbose_name = 'LeaderBoard'
         proxy = True
