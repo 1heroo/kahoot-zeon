@@ -26,7 +26,6 @@ class PlayerViewSet(viewsets.ModelViewSet):
     @action(methods=['post'], detail=False)
     def registration(self, request, pk=None):
         data = request.data
-        csrf_token = data['csrfmiddlewaretoken']
         new_player = Player.objects.create(
             username=data['username'],
             first_name=data['first_name'],
