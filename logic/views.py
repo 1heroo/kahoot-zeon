@@ -15,12 +15,6 @@ from django.http import HttpResponse
 class PlayerViewSet(viewsets.ModelViewSet):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
-    # def get_queryset(self):
-    #     pk = self.kwargs.get('pk')
-    #     if not pk:
-    #         return LogicConfig.objects.all()
-    #     return LogicConfig.objects.filter(pk=pk
-
     filter_backends = (SearchFilter, )
 
     @action(methods=['post'], detail=False)

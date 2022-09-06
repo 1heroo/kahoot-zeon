@@ -7,12 +7,14 @@ from .models import *
 
 class PlayerAdmin(admin.ModelAdmin):
     # displaying some fields in object list
-    list_display = ('id', 'first_name', 'last_name', 'email', 'phone_number', 'rank', 'final_score', 'is_active')
-    list_display_links = ('id', 'first_name', 'last_name', 'email')
+    list_display = ('first_name', 'last_name', 'get_group', 'email', 'phone_number', 'rank', 'final_score')
+    list_display_links = ('first_name', 'last_name', 'email')
     search_fields = ('first_name', 'phone_number', 'last_name', )
-    list_editable = ('is_active', )
     list_filter = ('groups', )
     ordering = ('rank', )
+
+    def get_group(self, obj):
+        return "\n".join([p.name for p in obj.groups.all()])
 
 
 class QuizAdmin(admin.ModelAdmin):

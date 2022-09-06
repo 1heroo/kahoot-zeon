@@ -4,10 +4,7 @@ from django.db import models
 
 
 class Player(AbstractUser):
-    # last_name = models.TextField(max_length=100)
-    groups = models.ManyToManyField(Group, blank=True)
     phone_number = models.IntegerField(blank=True, default=555)
-    # login = models.EmailField()
     final_score = models.IntegerField(default=0)
     rank = models.IntegerField(default=999, blank=True)
     passed_questions = models.IntegerField(default=0)
