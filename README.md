@@ -69,3 +69,4 @@ password: 123
 Swagger: 
 https://kahootadil.herokuapp.com/swagger/
 
+Лидерборд и разные фильрации and поиски реализованы в админке в соответствующих модельках
