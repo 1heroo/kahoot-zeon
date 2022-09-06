@@ -18,6 +18,7 @@ class PlayerSerializer(serializers.ModelSerializer):
     # group = serializers.HiddenField(default=None)
 
     class Meta:
+        
         model = Player
         fields = ('id', 'first_name', 'last_name', 'groups', 'phone_number', 'username', 'rank', 'final_score')
 

@@ -27,13 +27,12 @@ router.register(r'quiz', QuizViewSet, basename='quiz')
 router.register(r'answers', AnswerViewSet, basename='answer')
 
 # print(router.urls)
-# print(include('rest_framework.urls'))
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(router.urls)),
     path('api/v1/', include('rest_framework.urls')),
-    path('getting/', ListAPIView.as_view()),
+    path('getting/', HandleAnswer.as_view()),
     path('refresh-data/', refresh_rating_data, name='refresh')
 ]
 urlpatterns += swagger

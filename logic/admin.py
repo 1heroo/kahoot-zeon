@@ -1,8 +1,6 @@
 from django.contrib import admin
 from .models import *
-
-
-# Register your models here.
+from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
 
 class PlayerAdmin(admin.ModelAdmin):
@@ -17,16 +15,9 @@ class PlayerAdmin(admin.ModelAdmin):
         return "\n".join([p.name for p in obj.groups.all()])
 
 
-class QuizAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'quiz_topic', 'question_amount', 'player_passed_amount', 'group')
-    list_display_links = ('pk', 'quiz_topic')
-    filter_horizontal = ('question', )
-    list_editable = ('group',)
-
-
-class QuestionsAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'question_name', 'is_active', )
-    list_display_links = ('pk', 'question_name')
+class AnswerInline(NestedStackedInline):
+    model = Answer
+    extra = 0
 
 
 class AnswerAdmin(admin.ModelAdmin):
@@ -35,7 +26,39 @@ class AnswerAdmin(admin.ModelAdmin):
     list_editable = ('timer', )
 
 
+class QuestionInline(NestedStackedInline):
+    model = Questions
+    extra = 0
+
+
+class QuestionsAdmin(admin.ModelAdmin):
+    # inlines = (AnswerInline, )
+    list_display = ('pk', 'question_name', 'is_active', )
+    list_display_links = ('pk', 'question_name')
+
+
+class QuizAdmin(admin.ModelAdmin):
+    inlines = (QuestionInline, AnswerInline)
+    list_display = ('pk', 'quiz_topic', 'question_amount', 'player_passed_amount', 'group')
+    list_display_links = ('pk', 'quiz_topic')
+    filter_horizontal = ('question', )
+    list_editable = ('group',)
+
+
+class LeaderBoardAdmin(admin.ModelAdmin):
+    # displaying some fields in object list
+    list_display = ('first_name', 'last_name', 'get_group', 'email', 'phone_number', 'rank', 'final_score', 'passed_tests')
+    list_display_links = ('first_name', 'last_name', 'email')
+    search_fields = ('first_name', 'phone_number', 'last_name',)
+    list_filter = ('groups',)
+    ordering = ('rank',)
+
+    def get_group(self, obj):
+        return "\n".join([p.name for p in obj.groups.all()])
+
+
 admin.site.register(Player, PlayerAdmin)
+admin.site.register(LeaderBoard, LeaderBoardAdmin)
 admin.site.register(Quiz, QuizAdmin)
 admin.site.register(Questions, QuestionsAdmin)
 admin.site.register(Answer, AnswerAdmin)

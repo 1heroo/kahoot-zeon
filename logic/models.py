@@ -1,10 +1,11 @@
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.models import Group
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 
 class Player(AbstractUser):
-    phone_number = models.IntegerField(blank=True, default=555)
+    phone_number = PhoneNumberField(blank=True)
     final_score = models.IntegerField(default=0)
     rank = models.IntegerField(default=999, blank=True)
     passed_questions = models.IntegerField(default=0)
@@ -14,6 +15,8 @@ class Player(AbstractUser):
         return f'{self.first_name} {self.last_name}'
 
     class Meta:
+        verbose_name = "User"
+        verbose_name_plural = "Users"
         ordering = ['rank']
 
 
@@ -25,6 +28,7 @@ class Answer(models.Model):
     correct_answer = models.TextField(max_length=50)
     timer = models.IntegerField(default=20)
     score_for_answering = models.IntegerField(default=100)
+    level = models.ForeignKey("Quiz", blank=True, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
         return f'{self.correct_answer}'
@@ -35,8 +39,9 @@ class Questions(models.Model):
     question = models.TextField(max_length=150)
     image = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     is_active = models.BooleanField(default=True)
-    correct_answer = models.OneToOneField(Answer, on_delete=models.CASCADE)
+    correct_answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
     is_done_by_players = models.ManyToManyField(Player, blank=True)
+    level = models.ForeignKey("Quiz", on_delete=models.SET_NULL, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Question'
@@ -61,3 +66,9 @@ class Quiz(models.Model):
     class Meta:
         verbose_name_plural = 'Quizzes'
         ordering = ['pk']
+
+
+class LeaderBoard(Player):
+    class Meta(Player.Meta):
+        verbose_name = 'User'
+        proxy = True

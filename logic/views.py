@@ -15,6 +15,7 @@ from django.http import HttpResponse
 class PlayerViewSet(viewsets.ModelViewSet):
     queryset = Player.objects.all()
     serializer_class = PlayerSerializer
+    serializer_class = serializer_class
     filter_backends = (SearchFilter, )
 
     @action(methods=['post'], detail=False)
@@ -35,7 +36,7 @@ class PlayerViewSet(viewsets.ModelViewSet):
         })
 
 
-class ListAPIView(views.APIView):
+class HandleAnswer(views.APIView):
     # class to receive an answer from player
     def post(self, request):
         data = request.data
