@@ -30,6 +30,7 @@ class PlayerViewSet(viewsets.ModelViewSet):
         new_player = Player.objects.create(
             username=data['username'],
             first_name=data['first_name'],
+            phone_number=data['phone_number'],
             last_name=data['last_name'],
             email=data['email'],
             password=make_password(data['password'])
