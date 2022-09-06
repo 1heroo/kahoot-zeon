@@ -21,8 +21,8 @@ class AnswerInline(NestedStackedInline):
 
 
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ('pk', 'correct_answer', 'timer')
-    list_display_links = ('pk', 'correct_answer', )
+    list_display = ('correct_answer', 'timer')
+    list_display_links = ('correct_answer', )
     list_editable = ('timer', )
 
 
@@ -33,16 +33,15 @@ class QuestionInline(NestedStackedInline):
 
 class QuestionsAdmin(admin.ModelAdmin):
     # inlines = (AnswerInline, )
-    list_display = ('pk', 'question_name', 'is_active', )
-    list_display_links = ('pk', 'question_name')
+    list_display = ('question_name', 'is_active', )
+    list_display_links = ('question_name', )
 
 
 class QuizAdmin(admin.ModelAdmin):
     inlines = (QuestionInline, AnswerInline)
-    list_display = ('pk', 'quiz_topic', 'question_amount', 'player_passed_amount', 'group')
-    list_display_links = ('pk', 'quiz_topic')
+    list_display = ('quiz_topic', 'question_amount', 'player_passed_amount')
+    list_display_links = ('quiz_topic', )
     filter_horizontal = ('question', )
-    list_editable = ('group',)
 
 
 class LeaderBoardAdmin(admin.ModelAdmin):
