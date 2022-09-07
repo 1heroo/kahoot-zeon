@@ -15,7 +15,8 @@ class Player(AbstractUser):
         return f'{self.first_name} {self.last_name}'
 
     class Meta:
-        verbose_name = 'User'
+        verbose_name = 'LeaderBoard'
+        verbose_name_plural = 'Leaderboard'
         ordering = ['rank']
 
 
@@ -69,6 +70,6 @@ class Quiz(models.Model):
 
 class LeaderBoard(Player):
     class Meta(Player.Meta):
-        verbose_name = 'LeaderBoard'
-        verbose_name_plural = "leaderBoards"
+        verbose_name = 'User'
+        verbose_name_plural = "Users"
         proxy = True
