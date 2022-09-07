@@ -110,23 +110,23 @@ WSGI_APPLICATION = 'kahoot.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-#
 # DATABASES = {
 #     'default': {
-#         'ENGINE': "django.db.backends.postgresql_psycopg2",
-#         'NAME': "postr1",
-#         'USER': "zorgan",
-#         'PASSWORD': config('DB_PASSWORD'),
-#         'HOST': "localhost",
-#         'PORT': '',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+#
+DATABASES = {
+    'default': {
+        'ENGINE': "django.db.backends.postgresql_psycopg2",
+        'NAME': "dcfn7avms1mp09",
+        'USER': "gdqbeezlbzsvae",
+        'PASSWORD': "dc3a802b6362ad5074d84aae3a593edd24398a9756be67fb1e2c8c02847a362d",
+        'HOST': "ec2-44-205-63-142.compute-1.amazonaws.com",
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation
