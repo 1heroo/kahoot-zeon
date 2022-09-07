@@ -16,8 +16,8 @@ password: 123
 
 Регистрация обычного игрока через пост:
 
-	по следующему url - "https://kahootadil.herokuapp.com/api/v1/player/registration/"
-	Пост запрос на регистрацию следует отправлять в следующей форме
+по следующему url - "https://kahootadil.herokuapp.com/api/v1/player/registration/"
+Пост запрос на регистрацию следует отправлять в следующей форме
 
 {
     	"username": "aurora",
@@ -36,7 +36,8 @@ password: 123
 
 
 Распределение баллов: 
-	Адресс "https://kahootadil.herokuapp.com/getting/" обрабатывает post-запрос следующего вида:
+Адресс
+	"https://kahootadil.herokuapp.com/getting/" обрабатывает post-запрос следующего вида:
 	
 	{
           "player_id": 14,
@@ -63,10 +64,10 @@ password: 123
 какое количество опроссников было пройдено этим игроком и если найдется соответсвенно обновиться
 поле "passed_tests" в базе игроков.
 
-	Если данные не обновились можно пройти по следующему адресу: 
-"https://kahootadil.herokuapp.com/refresh-data/"
+Если данные не обновились можно пройти по следующему адресу: 
+	"https://kahootadil.herokuapp.com/refresh-data/"
 
 Swagger: 
-https://kahootadil.herokuapp.com/swagger/
+	https://kahootadil.herokuapp.com/swagger/
 
 Лидерборд и разные фильрации and поиски реализованы в админке в соответствующих модельках
