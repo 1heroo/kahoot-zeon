@@ -5,7 +5,7 @@ from nested_inline.admin import NestedStackedInline, NestedModelAdmin
 
 class PlayerAdmin(admin.ModelAdmin):
     # displaying some fields in object list
-    list_display = ('first_name', 'last_name', 'get_group', 'email', 'phone_number', 'rank', 'final_score')
+    list_display = ('first_name', 'last_name', 'get_group', 'email', 'phone_number', 'rank', 'final_score', 'passed_tests')
     list_display_links = ('first_name', 'last_name', 'email')
     search_fields = ('first_name', 'phone_number', 'last_name', )
     list_filter = ('groups', )
@@ -21,9 +21,9 @@ class AnswerInline(NestedStackedInline):
 
 
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ('correct_answer', 'timer')
-    list_display_links = ('correct_answer', )
-    list_editable = ('timer', )
+    list_display = ('answer', 'is_correct')
+    list_display_links = ('answer', )
+    list_editable = ('is_correct', )
 
 
 class QuestionInline(NestedStackedInline):
@@ -33,8 +33,11 @@ class QuestionInline(NestedStackedInline):
 
 class QuestionsAdmin(admin.ModelAdmin):
     # inlines = (AnswerInline, )
-    list_display = ('question_name', 'is_active', )
+    list_display = ('question_name', 'is_active')
     list_display_links = ('question_name', )
+
+    # def get_player(self, obj):
+    #     return "\n".join([p.first_name for p in obj.is_done_by_players.all()])
 
 
 class QuizAdmin(admin.ModelAdmin):
@@ -46,7 +49,7 @@ class QuizAdmin(admin.ModelAdmin):
 
 class LeaderBoardAdmin(admin.ModelAdmin):
     # displaying some fields in object list
-    list_display = ('first_name', 'last_name', 'get_group', 'email', 'phone_number', 'rank', 'final_score', 'passed_tests')
+    list_display = ('first_name', 'last_name', 'get_group', 'email', 'phone_number', 'rank', 'final_score')
     list_display_links = ('first_name', 'last_name', 'email')
     search_fields = ('first_name', 'phone_number', 'last_name',)
     list_filter = ('groups',)

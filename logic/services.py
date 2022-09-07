@@ -2,6 +2,9 @@ from .models import *
 from django.contrib.auth.hashers import make_password
 # the function 'make_password' is being used in other views.py
 
+quiz_data = Quiz.objects.all()
+players_data = Player.objects.all()
+
 
 def proceed_data(json_data):
     """
@@ -19,7 +22,6 @@ def proceed_data(json_data):
     """
     player_id = json_data['player_id']
     answer_id = json_data['answer_id']
-    players_answer = json_data['players_answer']
     answered_time = json_data['time']
     question_id = json_data['question_id']
 
@@ -27,11 +29,10 @@ def proceed_data(json_data):
     answer_objects = Answer.objects.get(pk=answer_id)
     question_objects = Questions.objects.get(pk=question_id)
 
-    correct_answer = answer_objects.correct_answer
-    question_score = answer_objects.score_for_answering
-    question_timer = answer_objects.timer
+    question_score = question_objects.score_for_answering
+    question_timer = question_objects.timer
 
-    is_answered = players_answer == correct_answer
+    is_answered = answer_objects.is_correct
     final_score = player_objects.final_score
 
     if player_objects in question_objects.is_done_by_players.all():
@@ -76,16 +77,13 @@ def passed_tests_calculating():
     from the entire test, if everything is answered correctly,
     then adds a score to the "passed_tests" field for a particular player
     """
-    quiz_data = Quiz.objects.all()
-    players_data = Player.objects.all()
-
     player_passed_question = 0
     for player in players_data:
         for quiz in quiz_data:
             all_questions = quiz.question.all()
             quiz_size = len(all_questions)
             for question in all_questions:
-                    player_passed_question += 1 if player in question.is_done_by_players.all() else 0
+                player_passed_question += 1 if player in question.is_done_by_players.all() else 0
             if player_passed_question == quiz_size and player not in quiz.is_done_by_players.all():
                 quiz.is_done_by_players.add(player)
                 player.passed_tests += 1
@@ -94,6 +92,29 @@ def passed_tests_calculating():
             quiz.question_amount = quiz_size
             quiz.save()
             player_passed_question = 0
+
+
+def update_player_info():
+    player_info = ''
+
+    for player in players_data:
+        player_info += f'{player}: \n'
+        for quiz in quiz_data:
+            all_questions = quiz.question.all()
+
+            if player in quiz.is_done_by_players.all():
+                player_info += f'      {quiz}: \n'
+
+                for question in all_questions:
+                    if player in question.is_done_by_players.all():
+                        player_info += f'            {question}: Answered Correctly! \n'
+
+        player_info += f'Answered {player.passed_questions} questions\nPassed {player.passed_tests} tests'
+        player.detail = player_info
+        player.save()
+        player_info = ''
+
+
 
 
 

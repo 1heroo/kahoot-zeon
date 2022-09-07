@@ -74,6 +74,7 @@ def refresh_rating_data(request):
     # procedures to refresh some data
     rating_algo()
     passed_tests_calculating()
+    update_player_info()
     return HttpResponse('Data refreshed')
 
 print(1)

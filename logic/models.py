@@ -10,6 +10,7 @@ class Player(AbstractUser):
     rank = models.IntegerField(default=999, blank=True)
     passed_questions = models.IntegerField(default=0)
     passed_tests = models.IntegerField(default=0)
+    detail = models.TextField(blank=True, default="No activity yet")
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -21,17 +22,13 @@ class Player(AbstractUser):
 
 
 class Answer(models.Model):
-    option_1 = models.CharField(max_length=50, blank=True)
-    option_2 = models.CharField(max_length=50, blank=True)
-    option_3 = models.CharField(max_length=50, blank=True)
-    option_4 = models.CharField(max_length=50, blank=True)
-    correct_answer = models.TextField(max_length=50)
-    timer = models.IntegerField(default=20)
-    score_for_answering = models.IntegerField(default=100)
+    answer = models.CharField(max_length=50, blank=True)
+    is_correct = models.BooleanField(default=False)
+
     level = models.ForeignKey("Quiz", blank=True, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return f'{self.correct_answer}'
+        return f'{self.answer}'
 
 
 class Questions(models.Model):
@@ -39,7 +36,10 @@ class Questions(models.Model):
     question = models.TextField(max_length=150)
     image = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     is_active = models.BooleanField(default=True)
-    correct_answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+    correct_answer = models.ForeignKey(Answer, on_delete=models.SET_NULL, null=True)
+    timer = models.IntegerField(default=20)
+    score_for_answering = models.IntegerField(default=100)
+
     is_done_by_players = models.ManyToManyField(Player, blank=True)
     level = models.ForeignKey("Quiz", on_delete=models.SET_NULL, blank=True, null=True)
 
@@ -53,8 +53,8 @@ class Questions(models.Model):
 
 class Quiz(models.Model):
     quiz_topic = models.CharField(max_length=50)
-    group = models.ForeignKey(Group, on_delete=models.PROTECT, null=True)
-    question = models.ManyToManyField(Questions)
+    group = models.ForeignKey(Group, on_delete=models.SET_NULL, null=True)
+    question = models.ManyToManyField(Questions, blank=True)
     is_done_by_players = models.ManyToManyField(Player, blank=True)
     is_active = models.BooleanField(default=True)
     question_amount = models.IntegerField(default=0)
