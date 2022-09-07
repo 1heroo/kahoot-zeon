@@ -24,7 +24,6 @@ router = routers.DefaultRouter()
 router.register(r'player', PlayerViewSet, basename='player')
 router.register(r'group', GroupViewSet, basename='group')
 router.register(r'quiz', QuizViewSet, basename='quiz')
-router.register(r'question', QuestionsViewSet, basename='question')
 router.register(r'answers', AnswerViewSet, basename='answer')
 
 # print(router.urls)

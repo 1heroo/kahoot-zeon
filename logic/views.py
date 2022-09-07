@@ -72,7 +72,8 @@ class AnswerViewSet(viewsets.ModelViewSet):
 
 def refresh_rating_data(request):
     # procedures to refresh some data
-    rating_algo_res = rating_algo()
+    rating_algo()
     passed_tests_calculating()
-    quiz_info()
-    return HttpResponse(f'{rating_algo_res}')
+    return HttpResponse('Data refreshed')
+
+print(1)
