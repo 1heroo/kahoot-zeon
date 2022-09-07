@@ -2,3 +2,4 @@
 venv/
 photos/
 .env
+db.sqlite3
