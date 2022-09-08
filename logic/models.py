@@ -72,4 +72,5 @@ class LeaderBoard(Player):
     class Meta(Player.Meta):
         verbose_name = 'User'
         verbose_name_plural = "Users"
+        ordering = ["first_name"]
         proxy = True
