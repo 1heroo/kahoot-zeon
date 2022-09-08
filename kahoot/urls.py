@@ -33,7 +33,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include(router.urls)),
     path('api/v1/', include('rest_framework.urls')),
-    path('answer-post/', HandleAnswer.as_view()),
+    path('answer-post/', AnswerPOSTAPICreate.as_view()),
     path('refresh-data/', refresh_rating_data, name='refresh')
 ]
 urlpatterns += swagger

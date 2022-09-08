@@ -1,4 +1,5 @@
 from django.forms import model_to_dict
+from rest_framework.viewsets import GenericViewSet
 
 from .permissions import *
 from .serializers import *
@@ -6,7 +7,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from django.contrib.auth.models import Group
-from rest_framework import viewsets, views, generics
+from rest_framework import viewsets, views, generics, mixins
 from.services import *
 from rest_framework.filters import SearchFilter
 from django.http import HttpResponse
@@ -38,10 +39,7 @@ class PlayerViewSet(viewsets.ModelViewSet):
 
 class HandleAnswer(views.APIView):
     # class to receive an answer from player
-    def post(self, request):
-        data = request.data
-        data = proceed_data(data)
-        return Response({'info': f'{data}'})
+    pass
 
 
 class GroupViewSet(viewsets.ModelViewSet):
@@ -66,6 +64,16 @@ class AnswerViewSet(viewsets.ModelViewSet):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     permission_classes = (IsAuthenticatedOrReadOnly, )
+
+
+class AnswerPOSTAPICreate(generics.CreateAPIView):
+    queryset = AnswerPOST.objects.all()
+    serializer_class = AnswerPOSTSerializer
+
+    def post(self, request, *args, **kwargs):
+        data = request.data
+        data = proceed_data(data)
+        return Response({'Info': f'Added {data} scores to user'})
 
 
 def refresh_rating_data(request):

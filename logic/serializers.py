@@ -45,3 +45,9 @@ class AnswerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Answer
         fields = '__all__'
+
+
+class AnswerPOSTSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnswerPOST
+        fields = "__all__"

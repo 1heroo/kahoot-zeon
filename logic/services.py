@@ -38,6 +38,7 @@ def proceed_data(json_data):
     if player_objects in question_objects.is_done_by_players.all():
         return "Sorry, but you have already answered!"
 
+    res = 0
     if is_answered:
         if answered_time == 1:
             res = question_score - (question_score / question_timer * answered_time) + (question_score / question_timer)
@@ -45,14 +46,13 @@ def proceed_data(json_data):
             res = question_score - (question_score / question_timer * answered_time)
 
         final_score = final_score + res
-
         question_objects.is_done_by_players.add(player_objects)
         question_objects.save()
 
         player_objects.final_score = final_score
         player_objects.passed_questions += 1
     player_objects.save()
-    return "An answer received!"
+    return res
 
 
 def rating_algo():

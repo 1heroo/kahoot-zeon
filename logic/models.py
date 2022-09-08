@@ -76,3 +76,10 @@ class LeaderBoard(Player):
         verbose_name_plural = "Users"
         ordering = ["first_name"]
         proxy = True
+
+
+class AnswerPOST(models.Model):
+    player_id = models.IntegerField(blank=True)
+    question_id = models.IntegerField(blank=True)
+    answer_id = models.IntegerField(blank=True)
+    time = models.IntegerField(blank=True)
