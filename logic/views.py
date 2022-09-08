@@ -73,4 +73,4 @@ def refresh_rating_data(request):
     rating_algo()
     passed_tests_calculating()
     update_player_info()
-    return HttpResponse('Data refreshed')
+    return HttpResponse(f'Data refreshed')

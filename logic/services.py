@@ -84,6 +84,9 @@ def passed_tests_calculating():
             quiz_size = len(all_questions)
             for question in all_questions:
                 player_passed_question += 1 if player in question.is_done_by_players.all() else 0
+                player.passed_questions = player_passed_question
+                player.save()
+
             if player_passed_question == quiz_size and player not in quiz.is_done_by_players.all():
                 quiz.is_done_by_players.add(player)
                 player.passed_tests += 1
