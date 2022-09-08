@@ -105,9 +105,9 @@ def update_player_info():
             if player in quiz.is_done_by_players.all():
                 player_info += f'      {quiz}: \n'
 
-                for question in all_questions:
-                    if player in question.is_done_by_players.all():
-                        player_info += f'            {question}: Answered Correctly! \n'
+            for question in all_questions:
+                if player in question.is_done_by_players.all():
+                    player_info += f'            {question}: Answered Correctly! \n'
 
         player_info += f'Answered {player.passed_questions} questions\nPassed {player.passed_tests} tests'
         player.detail = player_info
