@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import *
-from nested_inline.admin import NestedStackedInline, NestedModelAdmin
+from nested_inline.admin import *
 
 
 class PlayerAdmin(admin.ModelAdmin):
@@ -16,20 +16,21 @@ class PlayerAdmin(admin.ModelAdmin):
         return "\n".join([p.name for p in obj.groups.all()])
 
 
+# class AnswerInline(NestedStackedInline):
+#     model = Answer
+#     extra = 4
+#
+
 class AnswerInline(NestedStackedInline):
     model = Answer
     extra = 4
+    max_num = 4
 
 
 class AnswerAdmin(admin.ModelAdmin):
-    list_display = ('answer', 'is_correct')
-    list_display_links = ('answer', )
+    list_display = ('option', 'is_correct')
+    list_display_links = ('option', )
     list_editable = ('is_correct', )
-
-
-class QuestionInline(NestedStackedInline):
-    model = Questions
-    extra = 0
 
 
 class QuestionsAdmin(admin.ModelAdmin):
@@ -42,7 +43,6 @@ class QuestionsAdmin(admin.ModelAdmin):
 
 
 class QuizAdmin(admin.ModelAdmin):
-    inlines = (QuestionInline, AnswerInline)
     list_display = ('quiz_topic', 'question_amount', 'player_passed_amount')
     list_display_links = ('quiz_topic', )
     filter_horizontal = ('question', )

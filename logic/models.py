@@ -22,15 +22,13 @@ class Player(AbstractUser):
 
 
 class Answer(models.Model):
-    answer = models.CharField(max_length=50, blank=True)
+    option = models.CharField(max_length=50, blank=True)
     is_correct = models.BooleanField(default=False)
-
-    level1 = models.ForeignKey("Quiz", blank=True, on_delete=models.SET_NULL, null=True)
-    level2 = models.ForeignKey("Questions", blank=True, on_delete=models.SET_NULL, null=True)
+    level = models.ForeignKey("Questions", blank=True, on_delete=models.SET_NULL, null=True)
 
 
     def __str__(self):
-        return f'{self.answer}'
+        return f'{self.option}'
 
 
 class Questions(models.Model):
@@ -42,7 +40,6 @@ class Questions(models.Model):
     score_for_answering = models.IntegerField(default=100)
 
     is_done_by_players = models.ManyToManyField(Player, blank=True)
-    level = models.ForeignKey("Quiz", on_delete=models.SET_NULL, blank=True, null=True)
 
     class Meta:
         verbose_name = 'Question'
