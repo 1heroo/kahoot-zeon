@@ -25,7 +25,9 @@ class Answer(models.Model):
     answer = models.CharField(max_length=50, blank=True)
     is_correct = models.BooleanField(default=False)
 
-    level = models.ForeignKey("Quiz", blank=True, on_delete=models.SET_NULL, null=True)
+    level1 = models.ForeignKey("Quiz", blank=True, on_delete=models.SET_NULL, null=True)
+    level2 = models.ForeignKey("Questions", blank=True, on_delete=models.SET_NULL, null=True)
+
 
     def __str__(self):
         return f'{self.answer}'

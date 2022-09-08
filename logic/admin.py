@@ -32,7 +32,7 @@ class QuestionInline(NestedStackedInline):
 
 
 class QuestionsAdmin(admin.ModelAdmin):
-    # inlines = (AnswerInline, )
+    inlines = (AnswerInline, )
     list_display = ('question_name', 'is_active')
     list_display_links = ('question_name', )
 
