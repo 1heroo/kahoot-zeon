@@ -91,7 +91,7 @@ def passed_tests_calculating():
             quiz.player_passed_amount = len(quiz.is_done_by_players.all())
             quiz.question_amount = quiz_size
             quiz.save()
-            player_passed_question = 0
+        player_passed_question = 0
 
 
 def update_player_info():
