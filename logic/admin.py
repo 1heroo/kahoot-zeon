@@ -52,6 +52,7 @@ class LeaderBoardAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'get_group', 'email', 'phone_number', 'rank', 'final_score')
     list_display_links = ('first_name', 'last_name', 'email')
     search_fields = ('first_name', 'phone_number', 'last_name',)
+    list_editable = ('passed_tests', )
     list_filter = ('groups',)
     ordering = ('rank',)
 
