@@ -41,8 +41,6 @@ class HandleAnswer(views.APIView):
     def post(self, request):
         data = request.data
         data = proceed_data(data)
-        rating_algo()
-        passed_tests_calculating()
         return Response({'info': f'{data}'})
 
 
