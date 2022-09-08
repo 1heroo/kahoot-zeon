@@ -50,7 +50,7 @@ def proceed_data(json_data):
         question_objects.save()
 
         player_objects.final_score = final_score
-        player_objects.passed_questions += 1 if is_answered else 0
+        player_objects.passed_questions += 1
     player_objects.save()
     return "An answer received!"
 
