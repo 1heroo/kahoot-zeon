@@ -36,7 +36,7 @@ class Questions(models.Model):
     question = models.TextField(max_length=150)
     image = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
     is_active = models.BooleanField(default=True)
-    correct_answer = models.ForeignKey(Answer, on_delete=models.SET_NULL, null=True)
+    correct_answer = models.ForeignKey(Answer, on_delete=models.SET_NULL, null=True, blank=True)
     timer = models.IntegerField(default=20)
     score_for_answering = models.IntegerField(default=100)
 
