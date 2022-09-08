@@ -18,7 +18,7 @@ class PlayerAdmin(admin.ModelAdmin):
 
 class AnswerInline(NestedStackedInline):
     model = Answer
-    extra = 0
+    extra = 4
 
 
 class AnswerAdmin(admin.ModelAdmin):
