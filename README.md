@@ -16,7 +16,7 @@ password: 123
 
 Регистрация обычного игрока через пост:
 
-по следующему url - "https://kahootadil.herokuapp.com/api/v1/player/registration/"
+по следующему url - "https://kahootadilnew.herokuapp.com/api/v1/player/registration/"
 Пост запрос на регистрацию следует отправлять в следующей форме
 
 {
@@ -32,7 +32,7 @@ password: 123
 
 
 Логин обычных пользователей по след. адресу:
-"https://kahootadil.herokuapp.com/api/v1/login/"
+"https://kahootadilnew.herokuapp.com/api/v1/login/"
 
 
 Распределение баллов: 
