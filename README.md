@@ -37,13 +37,12 @@ password: 123
 
 Распределение баллов: 
 Адресс
-	"https://kahootadil.herokuapp.com/getting/" обрабатывает post-запрос следующего вида:
+	"https://kahootadilnew.herokuapp.com/getting/" обрабатывает post-запрос следующего вида:
 	
 	{
-          "player_id": 14,
+          "player_id": 1,
           "question_id": 1,
-          "answer_id": 4,
-          "players_answer": "Two",
+          "answer_id": 1,
           "time": 1
        }
 
@@ -65,9 +64,9 @@ password: 123
 поле "passed_tests" в базе игроков.
 
 Если данные не обновились можно пройти по следующему адресу: 
-	"https://kahootadil.herokuapp.com/refresh-data/"
+	"https://kahootadilnew.herokuapp.com/refresh-data/"
 
 Swagger: 
-	https://kahootadil.herokuapp.com/swagger/
+	https://kahootadilnew.herokuapp.com/swagger/
 
 Лидерборд и разные фильрации and поиски реализованы в админке в соответствующих модельках
